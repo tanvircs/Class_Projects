@@ -1,0 +1,19 @@
+Feature Set 
+Deepwalk-Dimension-7: deepwalk --format mat --input network.mat --number-walks 80 --representation-size 7 --walk-length 40 --window-size 10 --output dp_dimension_7.txt
+Deepwalk-Dimension-128: deepwalk --format mat --input network.mat --number-walks 80 --representation-size 128 --walk-length 40 --window-size 10 --output deepwalk_dimension_128.txt
+Node2vec-Dimension-7: python src/main.py --input final_edge_list.txt --output node2vec_dimension_7.emd --dimensions 7 --p 4 --q 1
+Node2vec-Dimension-128: python src/main.py --input final_edge_list.txt --output node2vec_dimension_128.emd --dimensions 7 --p 4 --q 1
+Line-Dimension-7: line -train final_edge_list.txt -output line_dimension_7.txt -binary 0 -size 7 -order 2 -negative 5 -samples 100 -rho 0.025
+Line-Dimension-128: line -train final_edge_list.txt -output line_dimension_128.txt -binary 0 -size 128 -order 2 -negative 5 -samples 100 -rho 0.025
+
+F1-Score
+Deepwalk-Dimension-7: python example_graphs/scoring.py --emb dp_dimension_7.txt --network Homo_sapiens.mat --num-shuffle 10 --all
+Deepwalk-Dimension-128: python example_graphs/scoring.py --emb deepwalk_dimension_128.txt --network Homo_sapiens.mat --num-shuffle 10 --all
+Node2vec-Dimension-7: python example_graphs/scoring.py --emb node2vec_dimension_7.emd --network Homo_sapiens.mat --num-shuffle 10 --all
+node2vec_dimension_128: python example_graphs/scoring.py --emb node2vec_dimension_128.emd.txt --network Homo_sapiens.mat --num-shuffle 10 --all
+line_dimension_7: python example_graphs/scoring.py --emb line_dimension_7.txt --network Homo_sapiens.mat --num-shuffle 10 --all
+line_dimension_128: python example_graphs/scoring.py --emb line_dimension_128.txt --network Homo_sapiens.mat --num-shuffle 10 --all
+Centrality-7: python example_graphs/scoring.py --emb final_output.txt --network Homo_sapiens.mat --num-shuffle 10 --all
+
+
+
